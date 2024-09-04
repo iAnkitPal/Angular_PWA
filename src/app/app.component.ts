@@ -25,13 +25,23 @@ export class AppComponent implements OnInit {
     this.getData();
   }
   addData() {
-    this.indexedDbService.addData({ id: 3, name: 'Anand Pandey' }).subscribe(() => {
+    this.indexedDbService.addData({ id: 2, name: 'Vishnu Sharma' }).subscribe(() => {
       console.log('Data added successfully');
       this.getData();
     });
   }
   getData() {
     this.indexedDbService.getData().pipe(mergeMap((x:any) => this.processResult(x))).subscribe((res:any) => {
+      console.log(res);
+    })
+  }
+  getDataById(id:number) {
+    this.indexedDbService.getRecordById(id).pipe(mergeMap((x:any) => this.processResult(x))).subscribe((res:any) => {
+      console.log(res);
+    })
+  }
+  deleteDataById(id:number) {
+    this.indexedDbService.deleteById(id).pipe(mergeMap((x:any) => this.processResult(x))).subscribe((res:any) => {
       console.log(res);
     })
   }

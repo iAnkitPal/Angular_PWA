@@ -47,11 +47,35 @@ export class IndexedDbService {
         const request = store.getAll();
         request.onsuccess = handler;
         request.onerror = (event:any) => {
-          console.error('Error adding data:', event.target.error);
+          console.error('Error getting data:', event.target.error);
         };
       });
     });
   }
-
-  // ... other methods for getting, updating, and deleting data
+  getRecordById(id:number): Observable<void> {
+    return fromEventPattern((handler) => {
+      this.openDb().then((db) => {
+        const transaction = db.transaction(this.storeName, 'readonly');
+        const store = transaction.objectStore(this.storeName);
+        const request = store.get(id);
+        request.onsuccess = handler;
+        request.onerror = (event:any) => {
+          console.error('Error getting data:', event.target.error);
+        };
+      });
+    });
+  }
+  deleteById(id:number): Observable<void> {
+    return fromEventPattern((handler) => {
+      this.openDb().then((db) => {
+        const transaction = db.transaction(this.storeName, 'readwrite');
+        const store = transaction.objectStore(this.storeName);
+        const request = store.delete(id);
+        request.onsuccess = handler;
+        request.onerror = (event:any) => {
+          console.error('Error deleting data:', event.target.error);
+        };
+      });
+    });
+  }
 }

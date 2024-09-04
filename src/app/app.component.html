@@ -183,6 +183,12 @@
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
       <button (click)="addData()">Add data</button>
+      <button (click)="getDataById(1)">Get John Doe</button>
+      <button (click)="getDataById(2)">Get Vishnu Sharma</button>
+      <button (click)="getDataById(3)">Get Anand Pandey</button>
+      <button (click)="deleteDataById(1)">Delete John Doe</button>
+      <button (click)="deleteDataById(2)">Delete Vishnu Sharma</button>
+      <button (click)="deleteDataById(3)">Delete Anand Pandey</button>
       <app-add-form></app-add-form>
     </div>
   </div>
